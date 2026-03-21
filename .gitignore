@@ -1,0 +1,260 @@
+# ==================================================
+# AgriGo Project .gitignore
+# Prevents committing sensitive files and build artifacts
+# ==================================================
+
+# ==================================================
+# Python
+# ==================================================
+venv/
+env/
+ENV/
+.venv/
+.env/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.coverage
+htmlcov/
+.hypothesis/
+__pycache__/
+instance/
+*.db
+*.sqlite
+*.sqlite3
+
+# ==================================================
+# Node.js / JavaScript
+# ==================================================
+node_modules/
+npm-debug.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+dist/
+.next/
+.nuxt/
+.cache/
+.vuepress/dist/
+
+# ==================================================
+# Android / Gradle
+# ==================================================
+.gradle
+.gradle/
+*.apk
+*.aar
+*.ap_
+*.aab
+.metadata
+bin/
+gen/
+local.properties
+.classpath
+.project
+.settings/
+*.jks
+*.keystore
+build/
+captures/
+.externalNativeBuild
+.cxx/
+*.iml
+.idea/
+.DS_Store
+out/
+
+# ==================================================
+# Environment & Secrets (CRITICAL)
+# ==================================================
+.env
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.js
+*.pem
+*.key
+*.crt
+*.cert
+secrets.json
+credentials.json
+firebase-key.json
+google-credentials.json
+api-keys.txt
+
+# ==================================================
+# IDE & Editor
+# ==================================================
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+.project
+.settings/
+.classpath
+*.sublime-workspace
+*.sublime-project
+.c9/
+*.tern-port
+.VisualStudioCode/
+
+# ==================================================
+# Logs & Temporary Files
+# ==================================================
+logs/
+log/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+reports/
+test-results/
+coverage/
+*.hprof
+*.jps
+
+# ==================================================
+# OS Specific
+# ==================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.AppleDouble
+.LSOverride
+*.cab
+*.msi
+*.msix
+*.exe
+*.dll
+
+# ==================================================
+# Build Outputs
+# ==================================================
+dist/
+build/
+*.min.js
+*.min.css
+.parcel-cache/
+.cache/
+.turbo/
+.next/
+.nuxt/
+.cache/
+.vuepress/dist/
+.serverless/
+.fusebox/
+.dynamodb/
+.tern-port/
+
+# ==================================================
+# Database
+# ==================================================
+*.db
+*.sqlite
+*.sqlite3
+*.rdb
+pgdata/
+data/
+
+# ==================================================
+# Uploads & Media
+# ==================================================
+uploads/
+media/
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+
+# ==================================================
+# Python Virtual Environments
+# ==================================================
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# ==================================================
+# Celery
+# ==================================================
+celerybeat-schedule
+celerybeat.pid
+
+# ==================================================
+# Research & Documentation (Optional)
+# ==================================================
+research/
+experiments/
+scratch/
+todo.txt
+notes.txt
+
+# ==================================================
+# Deployment & Production
+# ==================================================
+.render/
+render.yaml  # Optional: Keep this if you want to track deployments, ignore if secrets are embedded
+*.pem
+*.key
+
+# ==================================================
+# Docker
+# ==================================================
+.dockerignore
+
+# ==================================================
+# Performance Analysis
+# ==================================================
+*.hprof
+*.jps
+perf-results/
+flame-graphs/
+
+# ==================================================
+# Keep These (Important!)
+# ==================================================
+# DO NOT IGNORE:
+# - .env.example (safe template)
+# - render.yaml (deployment config - but check for secrets!)
+# - Procfile (deployment config)
+# - All source code files
+# - Documentation (*.md)
+

@@ -1,0 +1,46 @@
+services:
+  - type: web
+    name: agrigo-api-server
+    runtime: python
+    runtimeVersion: '3.10'
+    buildCommand: |
+      pip install --upgrade pip &&
+      pip install -r requirements.txt
+    startCommand: gunicorn -w 4 -b 0.0.0.0:$PORT app:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: PYTHONUNBUFFERED
+        value: 'true'
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: API_BASE_URL
+        value: https://agrigo-api-server.onrender.com
+      - key: CHAT_API_BASE_URL
+        value: https://agrigo-chatbot.onrender.com
+    # PostgreSQL database
+    databases:
+      - name: agrigo_db
+        plan: starter
+
+  - type: web
+    name: agrigo-chatbot
+    runtime: node
+    runtimeVersion: '18'
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: '3000'
+      - key: GEMINI_API_KEY
+        sync: false
+
+# Configure database details
+envVarGroups:
+  - name: database
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+
