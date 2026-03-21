@@ -30,6 +30,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.OutlinedButton
@@ -57,6 +58,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -93,18 +95,23 @@ private val allRoutes = listOf(
     AppRoute.Chat,
 )
 
-enum class AppRoute(val route: String, val title: String) {
-    Home("home", "Home"),
+enum class AppRoute(
+    val route: String,
+    val title: String,
+    val iconResId: Int = 0,
+    val bottomLabel: String = title,
+) {
+    Home("home", "Home", R.drawable.ic_home, "Home"),
     About("about", "About"),
-    Schemes("schemes", "Schemes"),
+    Schemes("schemes", "Schemes", R.drawable.ic_schemes, "Schemes"),
     Blog("blog", "Blog"),
     Contact("contact", "Contact"),
-    CropMonitoring("crop-monitoring", "Crop Monitoring"),
+    CropMonitoring("crop-monitoring", "Crop Monitoring", R.drawable.ic_crop, "Crops"),
     DiseaseDetection("disease-detection", "Disease Detection"),
     YieldPrediction("yield-prediction", "Yield Prediction"),
-    Marketplace("marketplace", "Marketplace"),
+    Marketplace("marketplace", "Marketplace", R.drawable.ic_marketplace, "Market"),
     FinancialSupport("financial-support", "Financial Support"),
-    Chat("chat", "AI Chat"),
+    Chat("chat", "AI Chat", R.drawable.ic_chat, "Chat"),
 }
 
 data class ChatMessage(val role: String, val text: String)
@@ -133,8 +140,26 @@ fun AgriGoApp(repository: ApiRepository = ApiRepository()) {
                                 restoreState = true
                             }
                         },
-                        icon = { Text(item.title.take(1)) },
-                        label = { Text(item.title) },
+                        icon = { 
+                            if (item.iconResId != 0) {
+                                Icon(
+                                    painter = painterResource(id = item.iconResId),
+                                    contentDescription = item.title,
+                                    modifier = Modifier.size(24.dp)
+                                )
+                            } else {
+                                Text(item.title.take(1))
+                            }
+                        },
+                        label = {
+                            Text(
+                                text = item.bottomLabel,
+                                maxLines = 1,
+                                softWrap = false,
+                                overflow = TextOverflow.Ellipsis,
+                                textAlign = TextAlign.Center,
+                            )
+                        },
                     )
                 }
             }
