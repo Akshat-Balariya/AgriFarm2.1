@@ -391,7 +391,7 @@ private fun SchemesScreen(repository: ApiRepository) {
         loading = false
     }
 
-    val items = if (schemes.isNotEmpty()) schemes.take(12) else fallback
+    val displaySchemes = if (schemes.isNotEmpty()) schemes.take(12) else fallback
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -403,7 +403,7 @@ private fun SchemesScreen(repository: ApiRepository) {
         }
         if (loading) item { Text("Loading live schemes...") }
         if (!error.isNullOrBlank()) item { Text("$error. Showing curated schemes.", color = MaterialTheme.colorScheme.error) }
-        items(items) { scheme ->
+        items(displaySchemes) { scheme ->
             Card {
                 Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                     Text(scheme.name, fontWeight = FontWeight.SemiBold)
@@ -436,7 +436,7 @@ private fun MarketplaceScreen(repository: ApiRepository) {
     }
 
     val source = if (prices.isNotEmpty()) prices else fallback
-    val items = source.filter {
+    val filteredPrices = source.filter {
         val term = search.trim().lowercase(Locale.getDefault())
         term.isBlank() ||
             it.cropName.lowercase(Locale.getDefault()).contains(term) ||
@@ -462,7 +462,7 @@ private fun MarketplaceScreen(repository: ApiRepository) {
         }
         if (loading) item { Text("Loading live market prices...") }
         if (!error.isNullOrBlank()) item { Text("$error. Showing fallback data.", color = MaterialTheme.colorScheme.error) }
-        items(items) { price ->
+        items(filteredPrices) { price ->
             Card {
                 Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(price.cropName, fontWeight = FontWeight.SemiBold)
