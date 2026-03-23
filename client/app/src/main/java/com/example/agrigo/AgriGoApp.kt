@@ -185,13 +185,7 @@ fun AgriGoApp(repository: ApiRepository = ApiRepository()) {
             composable(AppRoute.Chat.route) { ChatScreen(repository) }
         }
 
-        LaunchedEffect(Unit) {
-            scope.launch {
-                snackbarHostState.showSnackbar(
-                    "Using website parity assets and API flows. Configure API URLs in gradle.properties if needed.",
-                )
-            }
-        }
+
     }
 }
 
@@ -355,10 +349,10 @@ private fun CropMonitoringScreen(repository: ApiRepository) {
         result?.let { weather ->
             val rows = listOf(
                 "Location" to weather.location,
-                "Temperature" to weather.temperature?.let { "${it} C" }.orEmpty().ifBlank { "--" },
-                "Humidity" to weather.humidity?.let { "$it%" }.orEmpty().ifBlank { "--" },
-                "Rainfall" to weather.rainfall?.let { "$it mm" }.orEmpty().ifBlank { "--" },
-                "Wind" to weather.windSpeed?.let { "$it m/s" }.orEmpty().ifBlank { "--" },
+                "Temperature" to weather.temperature?.let { "${formatTwoDecimals(it)} C" }.orEmpty().ifBlank { "--" },
+                "Humidity" to weather.humidity?.let { "${formatTwoDecimals(it)}%" }.orEmpty().ifBlank { "--" },
+                "Rainfall" to weather.rainfall?.let { "${formatTwoDecimals(it)} mm" }.orEmpty().ifBlank { "--" },
+                "Wind" to weather.windSpeed?.let { "${formatTwoDecimals(it)} m/s" }.orEmpty().ifBlank { "--" },
                 "Condition" to weather.condition,
             )
             Card {
@@ -699,4 +693,8 @@ private fun formatInr(value: Double): String {
     val format = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("en-IN"))
     format.maximumFractionDigits = 0
     return format.format(value)
+}
+
+private fun formatTwoDecimals(value: Double): String {
+    return String.format(Locale.US, "%.2f", value)
 }
